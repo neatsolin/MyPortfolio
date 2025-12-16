@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solin Neat | Web Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        // Vercel specific configuration
+        if (typeof window !== 'undefined') {
+            // Handle 404 on client-side routing
+            if (window.location.pathname !== '/') {
+                window.history.replaceState(null, null, '/');
+            }
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+
+        .hero-gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-border {
+            border: 3px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, #667eea, #764ba2, #f093fb) border-box;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .glow {
+            box-shadow: 0 0 50px rgba(102, 126, 234, 0.3);
+        }
+
+        .hover-grow {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-grow:hover {
+            transform: scale(1.05);
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            transition: width 1.5s ease-out;
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        }
+
+        .project-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .nav-active {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 8px 20px;
+        }
+
+        .tech-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+            border: 1px solid #667eea20;
+            border-radius: 20px;
+            margin: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4a5568;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #667eea;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #667eea }
+        }
+
+        .animate-spin-slow {
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .timeline-dot { left: 30px !important; }
+            .timeline-line { left: 40px !important; }
+            .typewriter { white-space: normal; border-right: none; animation: none; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect py-4 shadow-sm">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold">
+                    <span class="hero-gradient-text">Solin Neat</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="#home" class="px-6 py-2 text-gray-700 hover:text-purple-600 font-medium transition">Home</a>
+                    <a href="#about" class="px-6 py-2 text-gray-700 hover:text-purple-600 font-medium transition">About</a>
+                    <a href="#skills" class="px-6 py-2 text-gray-700 hover:text-purple-600 font-medium transition">Skills</a>
+                    <a href="#projects" class="px-6 py-2 text-gray-700 hover:text-purple-600 font-medium transition">Projects</a>
+                    <a href="#experience" class="px-6 py-2 text-gray-700 hover:text-purple-600 font-medium transition">Experience</a>
+                    <a href="#contact" class="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-medium hover:shadow-lg transition">Contact</a>
+                </div>
+                
+                <button id="mobileMenuButton" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="mobile-menu mt-4 bg-white rounded-lg shadow-lg p-4">
+                <a href="#home" class="block py-3 text-gray-700 hover:text-purple-600 font-medium transition">Home</a>
+                <a href="#about" class="block py-3 text-gray-700 hover:text-purple-600 font-medium transition">About</a>
+                <a href="#skills" class="block py-3 text-gray-700 hover:text-purple-600 font-medium transition">Skills</a>
+                <a href="#projects" class="block py-3 text-gray-700 hover:text-purple-600 font-medium transition">Projects</a>
+                <a href="#experience" class="block py-3 text-gray-700 hover:text-purple-600 font-medium transition">Experience</a>
+                <a href="#contact" class="block py-3 text-center bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-medium mt-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 relative overflow-hidden">
+        <div class="blob top-0 right-0 transform translate-x-1/2 -translate-y-1/2"></div>
+        <div class="blob bottom-0 left-0 transform -translate-x-1/2 translate-y-1/2"></div>
+        
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="relative z-10">
+                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 mb-8">
+                        <div class="w-3 h-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 animate-pulse"></div>
+                        <span class="text-sm font-semibold text-purple-700">Web Developer</span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                        Hi, I'm <br>
+                        <span class="hero-gradient-text">Solin Neat</span>
+                    </h1>
+                    
+                    <div class="typewriter text-2xl font-medium text-gray-600 mb-8">
+                        Crafting Digital Experiences That Matter
+                    </div>
+                    
+                    <p class="text-lg text-gray-600 mb-10 leading-relaxed max-w-xl">
+                        Passionate web developer from Cambodia, specializing in modern web technologies. 
+                        Currently enhancing my skills at Passerelles Numériques Cambodia while gaining 
+                        practical experience at EPES Solution.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-semibold hover:shadow-xl hover:shadow-purple-200 transition-all duration-300 flex items-center gap-2">
+                            <i class="fas fa-paper-plane"></i>
+                            Get In Touch
+                        </a>
+                        <a href="#projects" class="px-8 py-3 border-2 border-purple-600 text-purple-600 rounded-full font-semibold hover:bg-purple-50 transition-all duration-300 flex items-center gap-2">
+                            <i class="fas fa-code"></i>
+                            View Projects
+                        </a>
+                    </div>
+                    
+                    <div class="flex gap-8 mt-12">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold hero-gradient-text">13+</div>
+                            <div class="text-sm text-gray-500">Skills</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold hero-gradient-text">7+</div>
+                            <div class="text-sm text-gray-500">Projects</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold hero-gradient-text">2+</div>
+                            <div class="text-sm text-gray-500">Years</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative flex justify-center items-center">
+                    <div class="relative w-full max-w-lg">
+                        <div class="absolute inset-0 border-4 border-purple-200 rounded-full animate-spin-slow"></div>
+                        <div class="absolute inset-8 border-4 border-pink-200 rounded-full animate-spin-slow" style="animation-direction: reverse;"></div>
+                        
+                        <div class="relative w-full aspect-square rounded-full overflow-hidden gradient-border glow floating">
+                            <img 
+                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600&q=80" 
+                                alt="Solin Neat"
+                                class="w-full h-full object-cover hover-grow"
+                                onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22><rect width=%22200%22 height=%22200%22 fill=%22%23667eea%22/><text x=%22100%22 y=%22100%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22>Solin Neat</text></svg>'"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        </div>
+                        
+                        <div class="absolute -top-4 -right-4 bg-white rounded-full p-4 shadow-lg hover-grow">
+                            <i class="fab fa-js text-3xl text-yellow-500"></i>
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 bg-white rounded-full p-4 shadow-lg hover-grow">
+                            <i class="fab fa-vuejs text-3xl text-green-500"></i>
+                        </div>
+                        <div class="absolute top-1/2 -right-12 bg-white rounded-full p-4 shadow-lg hover-grow">
+                            <i class="fab fa-php text-3xl text-purple-500"></i>
+                        </div>
+                        <div class="absolute top-1/2 -left-12 bg-white rounded-full p-4 shadow-lg hover-grow">
+                            <i class="fab fa-laravel text-3xl text-red-500"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">About Me</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 hero-gradient-text">Personal Details</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                                <i class="fas fa-user text-purple-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Full Name</p>
+                                <p class="font-semibold">Solin Neat</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                                <i class="fas fa-calendar text-purple-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Date of Birth</p>
+                                <p class="font-semibold">06th January 2003</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                                <i class="fas fa-map-marker-alt text-purple-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Location</p>
+                                <p class="font-semibold">Phnom Penh, Cambodia</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                                <i class="fas fa-graduation-cap text-purple-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Education</p>
+                                <p class="font-semibold">Associate Degree in Web Development</p>
+                                <p class="text-sm text-purple-600">Passerelles Numériques Cambodia</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                                <i class="fas fa-briefcase text-purple-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Current Role</p>
+                                <p class="font-semibold">IT Sales Intern</p>
+                                <p class="text-sm text-purple-600">EPES Solution</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 hero-gradient-text">My Journey</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Born in Kampong Thom and now based in Phnom Penh, I've been passionate about technology 
+                            from a young age. My journey in web development started with basic HTML/CSS and has 
+                            evolved into mastering modern frameworks and tools.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mt-4">
+                            Currently, I'm pursuing an Associate Degree in Web Development at Passerelles Numériques 
+                            Cambodia while interning at EPES Solution. This combination of academic learning and 
+                            practical experience has equipped me with both technical skills and professional mindset.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 hero-gradient-text">Languages</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">Khmer</span>
+                                    <span class="text-purple-600 font-medium">Native</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-medium">English</span>
+                                    <span class="text-purple-600 font-medium">Intermediate</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-level" style="width: 70%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">Technical Skills</h2>
+            
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold mb-8 hero-gradient-text flex items-center gap-3">
+                    <i class="fas fa-code"></i>
+                    Frontend Development
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover-grow">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-blue-100 to-blue-200 flex items-center justify-center mb-4">
+                            <i class="fab fa-html5 text-blue-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">HTML/CSS</h4>
+                        <div class="skill-bar mb-2">
+                            <div class="skill-level" style="width: 95%;"></div>
+                        </div>
+                        <p class="text-sm text-gray-500">Advanced</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover-grow">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-yellow-100 to-yellow-200 flex items-center justify-center mb-4">
+                            <i class="fab fa-js text-yellow-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">JavaScript</h4>
+                        <div class="skill-bar mb-2">
+                            <div class="skill-level" style="width: 80%;"></div>
+                        </div>
+                        <p class="text-sm text-gray-500">Intermediate</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover-grow">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-green-100 to-green-200 flex items-center justify-center mb-4">
+                            <i class="fab fa-vuejs text-green-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Vue.js</h4>
+                        <div class="skill-bar mb-2">
+                            <div class="skill-level" style="width: 75%;"></div>
+                        </div>
+                        <p class="text-sm text-gray-500">Intermediate</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover-grow">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-blue-100 to-cyan-200 flex items-center justify-center mb-4">
+                            <i class="fab fa-flutter text-blue-500 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Flutter</h4>
+                        <div class="skill-bar mb-2">
+                            <div class="skill-level" style="width: 70%;"></div>
+                        </div>
+                        <p class="text-sm text-gray-500">Intermediate</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold mb-8 hero-gradient-text flex items-center gap-3">
+                    <i class="fas fa-server"></i>
+                    Backend Development
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover-grow">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-purple-100 to-purple-200 flex items-center justify-center mb-4">
+                            <i class="fab fa-php text-purple-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">PHP/Laravel</h4>
+                        <div class="skill-bar mb-2">
+                            <div class="skill-level" style="width: 80%;"></div>
+                        </div>
+                        <p class="text-sm text-gray-500">Intermediate</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover-grow">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-orange-100 to-orange-200 flex items-center justify-center mb-4">
+                            <i class="fas fa-database text-orange-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">MySQL</h4>
+                        <div class="skill-bar mb-2">
+                            <div class="skill-level" style="width: 85%;"></div>
+                        </div>
+                        <p class="text-sm text-gray-500">Intermediate</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover-grow">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-green-100 to-green-200 flex items-center justify-center mb-4">
+                            <i class="fab fa-node-js text-green-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Node.js</h4>
+                        <div class="skill-bar mb-2">
+                            <div class="skill-level" style="width: 65%;"></div>
+                        </div>
+                        <p class="text-sm text-gray-500">Basic</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover-grow">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-r from-yellow-100 to-yellow-200 flex items-center justify-center mb-4">
+                            <i class="fas fa-fire text-yellow-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Firebase</h4>
+                        <div class="skill-bar mb-2">
+                            <div class="skill-level" style="width: 60%;"></div>
+                        </div>
+                        <p class="text-sm text-gray-500">Basic</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-bold mb-8 hero-gradient-text flex items-center gap-3">
+                    <i class="fas fa-tools"></i>
+                    Development Tools
+                </h3>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span class="tech-tag"><i class="fab fa-bootstrap mr-2"></i> Bootstrap 5</span>
+                    <span class="tech-tag"><i class="fas fa-wind mr-2"></i> Tailwind CSS</span>
+                    <span class="tech-tag"><i class="fab fa-sass mr-2"></i> SASS</span>
+                    <span class="tech-tag"><i class="fab fa-git-alt mr-2"></i> Git</span>
+                    <span class="tech-tag"><i class="fab fa-github mr-2"></i> GitHub</span>
+                    <span class="tech-tag"><i class="fab fa-jira mr-2"></i> Jira</span>
+                    <span class="tech-tag"><i class="fab fa-figma mr-2"></i> Figma</span>
+                    <span class="tech-tag"><i class="fas fa-cloud mr-2"></i> AWS</span>
+                    <span class="tech-tag"><i class="fab fa-linux mr-2"></i> Linux</span>
+                    <span class="tech-tag"><i class="fas fa-code-branch mr-2"></i> XAMPP</span>
+                    <span class="tech-tag"><i class="fas fa-chart-line mr-2"></i> Power BI</span>
+                    <span class="tech-tag"><i class="fab fa-python mr-2"></i> Python</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">Featured Projects</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card rounded-3xl p-8">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-6">
+                        <i class="fas fa-qrcode text-2xl hero-gradient-text"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">QR Code Menu App</h3>
+                    <p class="text-sm text-purple-600 font-medium mb-4">Virtual Company II Project</p>
+                    <p class="text-gray-600 mb-6">Restaurant menu system with QR code scanning and online ordering functionality.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">Flutter</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">Laravel</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">QA Testing</span>
+                    </div>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="far fa-calendar mr-2"></i>
+                        <span>July - Sep 2025</span>
+                    </div>
+                </div>
+                
+                <div class="project-card rounded-3xl p-8">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-6">
+                        <i class="fas fa-shopping-cart text-2xl hero-gradient-text"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">POS & E-commerce System</h3>
+                    <p class="text-sm text-purple-600 font-medium mb-4">Virtual Company I Project</p>
+                    <p class="text-gray-600 mb-6">Complete point-of-sale and e-commerce solution with inventory management.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">PHP</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">MySQL</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">JavaScript</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">Bootstrap</span>
+                    </div>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="far fa-calendar mr-2"></i>
+                        <span>Mar - Apr 2025</span>
+                    </div>
+                </div>
+                
+                <div class="project-card rounded-3xl p-8">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-6">
+                        <i class="fas fa-music text-2xl hero-gradient-text"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Music App Website</h3>
+                    <p class="text-sm text-purple-600 font-medium mb-4">JavaScript Project</p>
+                    <p class="text-gray-600 mb-6">Interactive music player with play, pause, and track management features.</p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">JavaScript</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">SASS</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">HTML/CSS</span>
+                    </div>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="far fa-calendar mr-2"></i>
+                        <span>Jan 2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">Experience & Education</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-purple-200 to-pink-200 timeline-line"></div>
+                    
+                    <div class="space-y-12">
+                        <div class="relative flex items-center">
+                            <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2"></div>
+                            <div class="w-1/2 pr-12 text-right">
+                                <h3 class="font-bold text-lg">Associate Degree in Web Development</h3>
+                                <p class="text-purple-600 font-medium">Passerelles Numériques Cambodia</p>
+                                <p class="text-sm text-gray-500">2024 - Present</p>
+                            </div>
+                            <div class="w-1/2 pl-12"></div>
+                        </div>
+                        
+                        <div class="relative flex items-center">
+                            <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2"></div>
+                            <div class="w-1/2 pl-12">
+                                <h3 class="font-bold text-lg">IT Sales Intern</h3>
+                                <p class="text-purple-600 font-medium">EPES Solution</p>
+                                <p class="text-sm text-gray-500">Sep 2024 - Present</p>
+                                <p class="text-gray-600 mt-2">Customer support, technical solutions, and workflow improvement</p>
+                            </div>
+                            <div class="w-1/2 pr-12 text-right"></div>
+                        </div>
+                        
+                        <div class="relative flex items-center">
+                            <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2"></div>
+                            <div class="w-1/2 pr-12 text-right">
+                                <h3 class="font-bold text-lg">High School Certificate (BAC II)</h3>
+                                <p class="text-purple-600 font-medium">Kampong Thom High School</p>
+                                <p class="text-sm text-gray-500">2023 - 2024</p>
+                            </div>
+                            <div class="w-1/2 pl-12"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-20">
+                <h3 class="text-2xl font-bold mb-8 hero-gradient-text text-center">Professional Workshops</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover-grow">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-4">
+                            <i class="fas fa-users text-purple-600"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Product Owner Workshop</h4>
+                        <p class="text-sm text-gray-500 mb-3">Requirement gathering & user stories</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover-grow">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-4">
+                            <i class="fas fa-palette text-purple-600"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">UX/UI Design Workshop</h4>
+                        <p class="text-sm text-gray-500 mb-3">Mockups, wireframes & design principles</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover-grow">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-100 to-pink-100 flex items-center justify-center mb-4">
+                            <i class="fas fa-chart-bar text-purple-600"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Data Analytics Workshop</h4>
+                        <p class="text-sm text-gray-500 mb-3">Python & Power BI for data visualization</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 section-title">Get In Touch</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 hero-gradient-text">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                                    <i class="fas fa-envelope text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Email</p>
+                                    <p class="font-semibold">solin.neat@example.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                                    <i class="fas fa-phone text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Phone</p>
+                                    <p class="font-semibold">+855 12 345 678</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                                    <i class="fas fa-map-marker-alt text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Location</p>
+                                    <p class="font-semibold">Phnom Penh, Cambodia</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h3 class="text-2xl font-bold mb-6 hero-gradient-text">Connect With Me</h3>
+                            <div class="flex gap-4">
+                                <a href="#" class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-lg hover:scale-110 transition">
+                                    <i class="fab fa-linkedin-in text-purple-600"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-lg hover:scale-110 transition">
+                                    <i class="fab fa-github text-purple-600"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-lg hover:scale-110 transition">
+                                    <i class="fab fa-telegram text-purple-600"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm hover:shadow-lg hover:scale-110 transition">
+                                    <i class="fab fa-facebook-f text-purple-600"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 hero-gradient-text">Send a Message</h3>
+                        <form id="contactForm" class="space-y-4">
+                            <div>
+                                <input type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition">
+                            </div>
+                            <div>
+                                <input type="email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition">
+                            </div>
+                            <div>
+                                <textarea placeholder="Your Message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition"></textarea>
+                            </div>
+                            <button type="button" onclick="sendMessage()" class="w-full px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-semibold hover:shadow-xl hover:shadow-purple-200 transition-all duration-300 flex items-center justify-center gap-2">
+                                <i class="fas fa-paper-plane"></i>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-2xl font-bold hero-gradient-text">Solin Neat</div>
+                    <p class="text-gray-400 mt-2">Web Developer & IT Professional</p>
+                </div>
+                <div class="text-gray-400 text-sm">
+                    <p>© 2024 Solin Neat. All rights reserved.</p>
+                    <p class="mt-1">Designed with ❤️ in Cambodia</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuButton').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobileMenu');
+            const button = document.getElementById('mobileMenuButton');
+            
+            if (!menu.contains(event.target) && !button.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobileMenu').classList.remove('active');
+            });
+        });
+
+        // Form submission
+        function sendMessage() {
+            alert('Thank you for your message! This is a demo form. In a real application, this would send your message.');
+            document.getElementById('contactForm').reset();
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animate skill bars when in viewport
+        function animateSkills() {
+            const skillBars = document.querySelectorAll('.skill-level');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.id === 'skills') {
+                        animateSkills();
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => observer.observe(section));
+
+        // Vercel deployment helper
+        console.log('Portfolio site ready for Vercel deployment!');
+        console.log('To deploy: Go to vercel.com → Drag & drop this HTML file');
+    </script>
+</body>
+</html>
